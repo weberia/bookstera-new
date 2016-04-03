@@ -1,0 +1,34 @@
+{
+  "name": "Bookstera",
+  "version": "1.0.0",
+  "description": "A showcase of pragmatic web systems",
+  "main": "server.js",
+  "scripts": {
+    "test": "mocha spec"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/weberia/bookstera-new.git"
+  },
+  "keywords": [
+    "syntactic",
+    "semantic",
+    "pragmatic",
+    "web",
+    "agent",
+    "interaction",
+    "communication"
+  ],
+  "author": "Bambang Purnomosidi D. P.",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/weberia/bookstera-new/issues"
+  },
+  "homepage": "https://github.com/weberia/bookstera-new#readme",
+  "dependencies": {
+    "hapi": "*",
+    "inert": "*",
+    "rethinkdb": "*",
+    "hapi-rethinkdb": "*"
+  }
+}
