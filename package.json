@@ -29,6 +29,6 @@
     "hapi": "*",
     "inert": "*",
     "rethinkdb": "*",
-    "hapi-rethinkdb": "*"
+    "vision": "*"
   }
 }
