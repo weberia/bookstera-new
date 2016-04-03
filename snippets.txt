@@ -1,0 +1,14 @@
+    const ldParts = request.params.ld.split('/');
+
+    var numArgs = ldParts.length;
+
+    if (numArgs > 2) {
+      reply("{'error': 'too many arguments'}");
+      return
+    }
+
+    var args1 =  encodeURIComponent(ldParts[0]);
+    var args2 =  encodeURIComponent(ldParts[1]);
+    
+    reply('ada ' + numArgs + ' component');
+

@@ -40,7 +40,43 @@ server.route({
   }
 });
 
+server.route({
+  method: 'GET',
+  path: '/semantix/{jsonld?}',
+  handler: function (request, reply) {
 
+    const jsonld = request.params.jsonld ? encodeURIComponent(request.params.jsonld) : 'list';
+
+    if (jsonld == 'list') {
+      r.db('bookstera').table('jsonld').run(cn, function(err, result) {
+        if (err) {
+          reply('error');
+        } else {
+          reply(result.toArray());
+        }
+      });
+    } else {
+      r.db('bookstera').table('jsonld').filter(r.row('@type').eq(jsonld)).run(cn, function(err, result) {
+        if (err) {
+          reply('error');
+        } else {
+          reply(result.toArray());
+        }
+      });
+    }
+  }
+});
+
+server.route({
+  method: 'GET',
+  path: '/collabox/{collab*}',
+  handler: function (request, reply) {
+
+    const collabParts = request.params.collab.split('/');
+    reply('Hello ' + encodeURIComponent(collabParts[0]) + ' ' + encodeURIComponent(collabParts[1]) + '!');
+
+  }
+});
 
 server.start((err) => {
   if (err) {

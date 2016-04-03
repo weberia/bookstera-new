@@ -29,6 +29,7 @@
     "hapi": "*",
     "inert": "*",
     "rethinkdb": "*",
-    "vision": "*"
+    "vision": "*",
+    "jsonld": "*"
   }
 }
