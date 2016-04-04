@@ -64,12 +64,13 @@ server.route({
         }
       });
     }
+  
   }
 });
 
 server.route({
   method: 'GET',
-  path: '/collabox/{collab*}',
+  path: '/collabox/{action}/{collab*}',
   handler: function (request, reply) {
 
     const collabParts = request.params.collab.split('/');
@@ -77,6 +78,23 @@ server.route({
 
   }
 });
+
+server.route({
+  method: ['GET', 'POST'],
+  path: '/speax',
+  handler: function (request, reply) {
+
+    //reply(request.params + request.method);
+    if (request.method == 'get') {
+      reply("{'error': 'only POST allowed'}");
+    } else {
+      reply(request.params);
+    }
+
+  }
+});
+
+
 
 server.start((err) => {
   if (err) {
