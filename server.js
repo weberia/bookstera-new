@@ -2,6 +2,8 @@
 
 const Hapi = require('hapi');
 const server = new Hapi.Server();
+var Path = require('path');
+var Inert = require('inert');
 
 server.connection({ port: 3000 });
 
@@ -11,6 +13,38 @@ r.connect( {host: 'archera', port: 28015, db: 'bookstera'}, function(err, conn) 
   if (err) throw err;
   cn = conn;
 })
+
+server.register(require('vision'), (err) => {
+  server.views({
+    engines: {
+      html: require('handlebars')
+    },
+    relativeTo: __dirname,
+    path: 'views/common'
+  });
+});
+
+server.register(Inert, (err) => {
+
+  if (err) {
+    throw err;
+  }
+
+  server.route({
+
+    method: 'GET',
+    path: '/assets/{param*}',
+    handler: {
+      directory: {
+        path: Path.join(__dirname, 'public'),
+        listing: true
+      }
+    }
+
+  });
+
+});
+
 
 server.route({
   method: 'GET',
@@ -73,8 +107,18 @@ server.route({
   path: '/collabox/{action}/{collab*}',
   handler: function (request, reply) {
 
+    var action = request.params.action;
+
     const collabParts = request.params.collab.split('/');
-    reply('Hello ' + encodeURIComponent(collabParts[0]) + ' ' + encodeURIComponent(collabParts[1]) + '!');
+
+    var arg1 = encodeURIComponent(collabParts[0]);
+    var arg2 = encodeURIComponent(collabParts[1]);
+
+    reply.view('index', {
+      whoami: 'Guest',
+      title: 'Judul ini',
+      message: 'Message ini'
+    });
 
   }
 });
@@ -93,8 +137,6 @@ server.route({
 
   }
 });
-
-
 
 server.start((err) => {
   if (err) {

@@ -30,6 +30,7 @@
     "inert": "*",
     "rethinkdb": "*",
     "vision": "*",
-    "jsonld": "*"
+    "jsonld": "*",
+    "handlebars": "*"
   }
 }
